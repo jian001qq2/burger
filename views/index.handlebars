@@ -1,7 +1,7 @@
 <!--Special note: use the form method to do the ajax, so don't need create a js file for this homework see activity 7 and 8 and other older activiites for refrrence-->
 <div class="jumbotron" style="text-align: center; background-color: orange">
   <div class="container">
-    <h1>Eat-Da-Burger</h1>
+    <h1>Eat-The-Burger</h1>
     <img src="assets/img/burger.jpg">
   </div>
 </div>
@@ -15,19 +15,13 @@
     </div>
     <!--put the all the data with devoured = false-->
     <div class="panel-body">
-      {{#each burgersData}}
-        {{#unless this.devoured}}
-        <div class = "good">
-          <!--form way http mehtod-->
-            <form action="burgers/update/{{this.id}}?_method=PUT" method="POST">
-              <input type="hidden" name="devoured" value="true">
-              <br />
-              <span>{{this.id}}. {{this.burger_name}}<button type="submit" class="btn btn-primary" style = "margin-left: 20px;">Eat it!</button></span>
-            </form>
-          <br />
-        </div>  
+     <ul>
+      {{#each burgers}}
+        {{#unless devoured}}
+        {{> burgers/burger-block devoured=false}}
         {{/unless}}
       {{/each}}
+      </ul>
     </div>
   </div>
 </div>
@@ -38,14 +32,14 @@
       <h3 class="panel-title" style="text-align: center">Add a Burger</h3>
     </div>
     <div class="panel-body">
-      <form class="create-update-form" action="burgers/create" method="POST">
+      <form class="create-form">
         <div class="form-group">
           <label for="newBurger">Burger Name:</label>
           <input type="hidden" name="devoured" value="0">
-          <input type="text" id="newBurger" name="burger_name">
+          <input type="text" id="new-burger" name="burger_name">
           <br />
           <br />
-          <button type="submit" class="btn btn-warning center-block">Add Burger</button>
+          <button id="submit-burger"type="submit" class="btn btn-warning center-block">Add Burger</button>
         </div>   
       </form>
     </div>
@@ -58,14 +52,13 @@
       <h3 class="panel-title" style="text-align: center">Eaten burgers</h3>
     </div>
     <div class="panel-body">
-      {{#each burgersData}}
-        {{#if this.devoured}}
-          <p># {{this.burger_name}}</p>
-            <form action="burgers/update/{{this.id}}?_method=PUT" method="POST">
-              <input type="hidden" name="devoured" value="false">
-            </form>
+      <ul> 
+        {{#each burgers}}
+        {{#if devoured}}
+          <p>{{id}} {{burger_name}}</p>
         {{/if}}
-      {{/each}}
+      {{/each}}</ul>
+     
     </div>
   </div>    
 </div>
