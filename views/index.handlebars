@@ -5,7 +5,7 @@
     <img src="assets/img/burger.jpg">
   </div>
 </div>
-<div class="container">
+<div class="container content-group">
   <div class="row">
     <!--first panel for what to be eaten-->
 <div class="col-md-4">
@@ -18,7 +18,13 @@
      <ul>
       {{#each burgers}}
         {{#unless devoured}}
-        {{> burgers/burger-block devoured=false}}
+        <form ><span> {{id}}. {{burger_name}}<button class="eat-burger btn btn-primary" style = "margin-left: 20px; "
+ data-id="{{id}}" data-devoured="{{devoured}}">Eat it!</button>
+   </span>
+   <br>
+   <br>
+</form>
+   
         {{/unless}}
       {{/each}}
       </ul>
@@ -55,7 +61,7 @@
       <ul> 
         {{#each burgers}}
         {{#if devoured}}
-          <p>{{id}} {{burger_name}}</p>
+          <p>{{id}}. {{burger_name}}</p>
         {{/if}}
       {{/each}}</ul>
      
